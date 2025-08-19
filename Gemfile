@@ -36,7 +36,7 @@ gem "thruster", require: false
 gem "rack-cors"
 
 # SQL parsing and analysis gems
-gem "pg_query", "~> 5.1"  # PostgreSQL query parser
+gem "pg_query", "~> 6.1"  # PostgreSQL query parser
 gem "parser", "~> 3.3"    # Ruby parser for additional analysis
 
 # API and serialization
