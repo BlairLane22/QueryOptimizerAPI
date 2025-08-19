@@ -17,6 +17,18 @@
 /config/database.yml
 !/config/database.yml.example
 
+# Google Cloud credentials and keys
+/gcp-key.json
+/service-account-key.json
+/.config/gcloud/
+/google-cloud-key.json
+*-key.json
+*-credentials.json
+
+# Cloud Run and GCP deployment files with sensitive data
+/app.yaml.production
+/cloudbuild.yaml.production
+
 # === GEM DEVELOPMENT ===
 # Bundler
 /.bundle/
@@ -75,13 +87,31 @@ ehthumbs.db
 Thumbs.db
 
 # === DEPLOYMENT ===
-# Docker
-/.dockerignore
+# Docker production files
 /Dockerfile.prod
+/docker-compose.prod.yml
+/docker-compose.override.yml
 
 # Deployment scripts with sensitive info
 /deploy/
-/scripts/deploy*
+/scripts/deploy*.local
+/scripts/*-prod.sh
+
+# Cloud deployment configurations
+/terraform/
+/ansible/
+/.kube/
+/k8s/secrets/
+
+# Cloud provider specific
+# AWS
+/.aws/
+/aws-credentials
+# Azure
+/.azure/
+# Google Cloud (additional patterns)
+/.gcloud/
+/gcp-config/
 
 # === DOCUMENTATION ===
 # Generated documentation
@@ -92,3 +122,50 @@ Thumbs.db
 *.bak
 *.backup
 *.old
+
+# === CLOUD RUN / GCP SPECIFIC ===
+# Build artifacts
+/build/
+/.build/
+
+# Cloud Run service files with project-specific data
+/app.yaml.local
+/service.yaml
+
+# GCP project configuration
+/.gcp/
+/gcp-project-config.json
+
+# Cloud SQL proxy
+/cloud_sql_proxy
+
+# === MONITORING AND LOGS ===
+# Application logs
+/logs/
+*.log.*
+/log/*.log
+
+# Monitoring data
+/metrics/
+/traces/
+
+# === TEMPORARY BUILD FILES ===
+# Ruby/Rails temporary files
+/.bundle/
+/vendor/bundle/
+/tmp/cache/
+/tmp/pids/
+/tmp/sessions/
+/tmp/sockets/
+
+# Node.js (if using for assets)
+/node_modules/
+/npm-debug.log*
+/yarn-debug.log*
+/yarn-error.log*
+
+# === SECURITY SCANS ===
+# Security scan results
+/security-scan-results/
+/vulnerability-reports/
+*.security-report

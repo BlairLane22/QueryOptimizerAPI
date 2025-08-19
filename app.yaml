@@ -1,0 +1,109 @@
+# Google Cloud Run service configuration
+# This file defines the Cloud Run service settings
+
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: query-optimizer-api
+  annotations:
+    run.googleapis.com/ingress: all
+    run.googleapis.com/execution-environment: gen2
+spec:
+  template:
+    metadata:
+      annotations:
+        # Scaling configuration
+        autoscaling.knative.dev/minScale: "0"
+        autoscaling.knative.dev/maxScale: "10"
+        
+        # Resource allocation
+        run.googleapis.com/memory: "512Mi"
+        run.googleapis.com/cpu: "1"
+        
+        # Timeout configuration
+        run.googleapis.com/timeout: "300"
+        
+        # Cloud SQL connection
+        run.googleapis.com/cloudsql-instances: PROJECT_ID:us-central1:query-optimizer-db
+        
+        # VPC connector (if needed)
+        # run.googleapis.com/vpc-access-connector: projects/PROJECT_ID/locations/us-central1/connectors/default
+        
+    spec:
+      serviceAccountName: query-optimizer@PROJECT_ID.iam.gserviceaccount.com
+      containerConcurrency: 80
+      timeoutSeconds: 300
+      
+      containers:
+      - image: gcr.io/PROJECT_ID/query-optimizer-api:latest
+        ports:
+        - name: http1
+          containerPort: 8080
+        
+        env:
+        - name: RAILS_ENV
+          value: "production"
+        - name: PORT
+          value: "8080"
+        - name: RAILS_LOG_TO_STDOUT
+          value: "true"
+        - name: RAILS_SERVE_STATIC_FILES
+          value: "true"
+        
+        # Database configuration
+        - name: DATABASE_URL
+          value: "postgresql://rails:PASSWORD@/query_optimizer_production?host=/cloudsql/PROJECT_ID:us-central1:query-optimizer-db"
+        
+        # Secrets from Secret Manager
+        - name: RAILS_MASTER_KEY
+          valueFrom:
+            secretKeyRef:
+              name: rails-master-key
+              key: latest
+        
+        - name: SECRET_KEY_BASE
+          valueFrom:
+            secretKeyRef:
+              name: rails-master-key
+              key: latest
+        
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "1000m"
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+        
+        # Health check
+        livenessProbe:
+          httpGet:
+            path: /api/v1/health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          timeoutSeconds: 5
+          failureThreshold: 3
+        
+        readinessProbe:
+          httpGet:
+            path: /api/v1/health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        
+        # Startup probe for slow starts
+        startupProbe:
+          httpGet:
+            path: /api/v1/health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 30
+
+  traffic:
+  - percent: 100
+    latestRevision: true

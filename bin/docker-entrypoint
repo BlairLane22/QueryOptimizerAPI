@@ -8,7 +8,22 @@ fi
 
 # If running the rails server then create or migrate existing database
 if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
+  echo "🔍 Preparing database..."
+
+  # Wait for database to be ready (if DATABASE_URL contains a host)
+  if [[ "$DATABASE_URL" == *"@"* ]]; then
+    DB_HOST=$(echo $DATABASE_URL | sed -n 's/.*@\([^:]*\).*/\1/p')
+    until pg_isready -h $DB_HOST -p 5432 -U postgres 2>/dev/null; do
+      echo "⏳ Waiting for database to be ready..."
+      sleep 2
+    done
+    echo "✅ Database is ready!"
+  fi
+
+  # Prepare database
   ./bin/rails db:prepare
+
+  echo "🚀 Starting Query Optimizer API..."
 fi
 
 exec "${@}"
