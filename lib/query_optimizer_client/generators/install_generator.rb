@@ -5,7 +5,7 @@ require 'rails/generators'
 module QueryOptimizerClient
   module Generators
     class InstallGenerator < Rails::Generators::Base
-      desc "Install Query Optimizer Client"
+      desc "Install QueryWise"
       
       source_root File.expand_path('templates', __dir__)
       

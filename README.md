@@ -1,9 +1,9 @@
-# Query Optimizer Client
+# QueryWise
 
 A Ruby gem for integrating with the Rails Database Query Optimizer API to detect N+1 queries, slow queries, and missing indexes in your Rails applications.
 
-[![Gem Version](https://badge.fury.io/rb/query_optimizer_client.svg)](https://badge.fury.io/rb/query_optimizer_client)
-[![Build Status](https://github.com/yourusername/query_optimizer_client/workflows/CI/badge.svg)](https://github.com/yourusername/query_optimizer_client/actions)
+[![Gem Version](https://badge.fury.io/rb/QueryWise.svg)](https://badge.fury.io/rb/QueryWise)
+[![Build Status](https://github.com/BlairLane22/QueryWise/workflows/CI/badge.svg)](https://github.com/BlairLane22/QueryWise/actions)
 
 ## Features
 
@@ -24,7 +24,7 @@ Follow this guide to implement Query Optimizer Client in your Rails project in u
 Add to your `Gemfile`:
 
 ```ruby
-gem 'query_optimizer_client'
+gem 'QueryWise'
 ```
 
 Run bundle install:
@@ -38,7 +38,7 @@ bundle install
 Run the installation generator:
 
 ```bash
-rails generate query_optimizer_client:install
+rails generate QueryWise:install
 ```
 
 This creates:
