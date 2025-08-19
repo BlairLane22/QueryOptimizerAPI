@@ -1,0 +1,137 @@
+# === SENSITIVE INFORMATION ===
+# Environment files with API keys and secrets
+.env*
+!.env.example
+
+# RubyGems credentials and API keys
+.gem/
+~/.gem/credentials
+
+# Any files containing API keys or tokens
+*api_key*
+*secret*
+*token*
+*password*
+!*example*
+!*template*
+!*spec*
+
+# === GEM DEVELOPMENT ===
+# Bundler
+.bundle/
+vendor/bundle/
+
+# Built gems
+*.gem
+
+# Gem build artifacts
+pkg/
+
+# === TESTING ===
+# RSpec
+.rspec_status
+
+# Test coverage
+coverage/
+
+# VCR cassettes (may contain API responses with sensitive data)
+spec/vcr_cassettes/
+spec/fixtures/vcr_cassettes/
+
+# Test databases
+test.db
+spec/test.db
+
+# === DEVELOPMENT TOOLS ===
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Vim
+*.un~
+Session.vim
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# === OS GENERATED FILES ===
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+
+# Windows
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Linux
+*~
+.directory
+
+# === DOCUMENTATION ===
+# Generated documentation
+doc/
+.yardoc/
+.yard/
+
+# === LOGS ===
+# Log files
+*.log
+log/
+
+# === TEMPORARY FILES ===
+# Temporary files
+tmp/
+temp/
+
+# === BACKUP FILES ===
+*.bak
+*.backup
+*.old
+*.orig
+
+# === RUBY SPECIFIC ===
+# IRB history
+.irb_history
+
+# Ruby version managers
+.rvmrc
+.ruby-version
+.ruby-gemset
+
+# === CI/CD ===
+# GitHub Actions artifacts
+.github/workflows/artifacts/
+
+# === DEPLOYMENT ===
+# Deployment configurations
+deploy.rb
+config/deploy/
+
+# Docker
+Dockerfile.prod
+docker-compose.prod.yml
+
+# === MISC ===
+# Ignore any local configuration overrides
+local_config.rb
+config/local.rb
+
+# Ignore any personal notes or TODO files
+TODO.md
+NOTES.md
+personal_notes.txt

@@ -1,0 +1,46 @@
+===============================================================================
+
+  Query Optimizer Client has been installed!
+
+===============================================================================
+
+Next steps:
+
+1. Set up your environment variables:
+   
+   Add to your .env file:
+   QUERY_OPTIMIZER_API_URL=http://localhost:3000/api/v1
+   QUERY_OPTIMIZER_API_KEY=your_api_key_here
+   QUERY_OPTIMIZER_ENABLED=true
+
+2. Generate an API key (if you don't have one):
+   
+   rails query_optimizer:generate_key["My App Name"]
+
+3. Test your configuration:
+   
+   rails query_optimizer:check
+
+4. Run a sample analysis:
+   
+   rails query_optimizer:analyze
+
+5. Set up CI/CD integration:
+   
+   Add to your CI pipeline:
+   rails query_optimizer:ci[85]
+
+6. Customize the configuration in:
+   
+   config/initializers/query_optimizer_client.rb
+
+7. Optional: Customize the analysis job in:
+   
+   app/jobs/query_optimizer_client/analysis_job.rb
+
+===============================================================================
+
+For more information, visit:
+https://github.com/yourusername/query_optimizer_client
+
+===============================================================================

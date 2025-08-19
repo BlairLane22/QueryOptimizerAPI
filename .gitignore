@@ -4,29 +4,91 @@
 # belong in git's global ignore instead:
 # `$XDG_CONFIG_HOME/git/ignore` or `~/.config/git/ignore`
 
-# Ignore bundler config.
-/.bundle
-
-# Ignore all environment files.
+# === SENSITIVE INFORMATION ===
+# Environment files with API keys and secrets
 /.env*
+!/.env.example
 
-# Ignore all logfiles and tempfiles.
+# Rails master key and credentials
+/config/master.key
+/config/credentials.yml.enc
+
+# Database configuration with passwords
+/config/database.yml
+!/config/database.yml.example
+
+# === GEM DEVELOPMENT ===
+# Bundler
+/.bundle/
+/vendor/bundle/
+
+# Built gems
+/*.gem
+
+# RubyGems credentials
+/.gem/
+
+# === RAILS API ===
+# Logfiles and tempfiles
 /log/*
 /tmp/*
 !/log/.keep
 !/tmp/.keep
 
-# Ignore pidfiles, but keep the directory.
+# Pidfiles
 /tmp/pids/*
 !/tmp/pids/
 !/tmp/pids/.keep
 
-# Ignore storage (uploaded files in development and any SQLite databases).
+# Storage (uploaded files and SQLite databases)
 /storage/*
 !/storage/.keep
 /tmp/storage/*
 !/tmp/storage/
 !/tmp/storage/.keep
 
-# Ignore master key for decrypting credentials and more.
-/config/master.key
+# === TESTING ===
+# Test coverage reports
+/coverage/
+
+# RSpec status file
+/.rspec_status
+
+# VCR cassettes (may contain sensitive API responses)
+/spec/vcr_cassettes/
+
+# === DEVELOPMENT TOOLS ===
+# IDE and editor files
+/.vscode/
+/.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# === DEPLOYMENT ===
+# Docker
+/.dockerignore
+/Dockerfile.prod
+
+# Deployment scripts with sensitive info
+/deploy/
+/scripts/deploy*
+
+# === DOCUMENTATION ===
+# Generated documentation
+/doc/
+/.yardoc/
+
+# === BACKUP FILES ===
+*.bak
+*.backup
+*.old
